@@ -1,6 +1,7 @@
 const grid = document.querySelector('.grid');
 const spanPlayer = document.querySelector('.player');
 const timer = document.querySelector('.timer');
+const audio = new Audio("../audio/black-knight.mp3");
 
 const characters = [
   'beth',
@@ -30,6 +31,7 @@ const checkEndGame = () => {
   if (disabledCards.length === 20) {
     clearInterval(this.loop);
     alert(`Parabéns, ${spanPlayer.innerHTML}! Seu tempo foi: ${timer.innerHTML}`);
+    stopMusic();
   }
 }
 
@@ -76,7 +78,7 @@ const revealCard = ({ target }) => {
 
     target.parentNode.classList.add('reveal-card');
     secondCard = target.parentNode;
-
+    playMusic();
     checkCards();
 
   }  
@@ -110,12 +112,21 @@ const loadGame = () => {
   });
 }
 
+function playMusic () {
+  audio.play();
+}
+
+function stopMusic () {
+  audio.pause();
+}
+
 const startTimer = () => {
   
 this.loop = setInterval(() => {
   
   const currentTime = +timer.innerHTML;
   timer.innerHTML = currentTime + 1
+  
 
 }, 1000);  
 
@@ -125,6 +136,7 @@ this.loop = setInterval(() => {
 
 window.onload = () => {
  spanPlayer.innerHTML = localStorage.getItem('player');
+
   startTimer();
   loadGame();
 }
