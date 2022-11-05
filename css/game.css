@@ -23,6 +23,31 @@ header {
   border-radius: 5px;
 }
 
+.buttons_section{
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+  width: 100%;
+  max-width: 110px;
+}
+
+.button_song{
+   padding: 10px ;
+   background-color: #000; 
+   border-radius: 35px;
+   cursor: pointer;
+}
+.button_song:hover{
+  transform: scale(1.1);
+}
+.fa-volume-xmark{
+  color:#fff ;
+}
+
+.fa-volume-high{
+  color:#fff
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);

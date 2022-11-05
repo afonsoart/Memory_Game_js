@@ -1,7 +1,10 @@
 const grid = document.querySelector('.grid');
 const spanPlayer = document.querySelector('.player');
 const timer = document.querySelector('.timer');
-const audio = new Audio("../audio/black-knight.mp3");
+const audio = new Audio("../audio/former.mp3");
+const revealAudio = new Audio("../audio/reveal.wav")
+const combinedCardAudio = new Audio ("../audio/combined_card.wav")
+const victorySound = new Audio ("../audio/game_win.wav")
 
 const characters = [
   'beth',
@@ -30,8 +33,10 @@ const checkEndGame = () => {
 
   if (disabledCards.length === 20) {
     clearInterval(this.loop);
+    winSound();
     alert(`Parabéns, ${spanPlayer.innerHTML}! Seu tempo foi: ${timer.innerHTML}`);
     stopMusic();
+    
   }
 }
 
@@ -46,7 +51,7 @@ const checkCards = () => {
 
     firstCard = '';
     secondCard = '';
-
+    combinedCardSoundEffect(); 
     checkEndGame();
 
   } else {
@@ -57,7 +62,7 @@ const checkCards = () => {
 
       firstCard = '';
       secondCard = '';
-
+    ReavealCardSoundEffect();
     }, 500);
   }
 
@@ -78,8 +83,8 @@ const revealCard = ({ target }) => {
 
     target.parentNode.classList.add('reveal-card');
     secondCard = target.parentNode;
-    playMusic();
     checkCards();
+    
 
   }  
 }
@@ -112,8 +117,22 @@ const loadGame = () => {
   });
 }
 
-function playMusic () {
+function winSound () {
+  victorySound.play();
+}
+
+function combinedCardSoundEffect () {
+  combinedCardAudio.play();
+}
+
+function ReavealCardSoundEffect (){
+  revealAudio.play();
+}
+
+function playSoundtrack () {
+  audio.loop = true;
   audio.play();
+  audio.volume = 0.1;
 }
 
 function stopMusic () {
